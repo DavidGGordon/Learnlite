@@ -1,7 +1,7 @@
+import streamlit as st
 import requests
-import os
 
-TOGETHER_API_KEY = os.getenv("c60ae9468c290bda303a18c78f228466a5d70488e790e6019b81cdb1bdac1bbd")
+TOGETHER_API_KEY = st.secrets["together_api_key"]
 TOGETHER_API_URL = "https://api.together.xyz/v1/chat/completions"
 
 def generate_lesson(topic, level="Beginner", style="Summary"):
@@ -11,7 +11,7 @@ def generate_lesson(topic, level="Beginner", style="Summary"):
     }
 
     data = {
-        "model": "mistralai/Mistral-7B-Instruct-v0.2",  # or another model from Together
+        "model": "mistralai/Mistral-7B-Instruct-v0.2",  # You can use any supported Together model
         "messages": [
             {"role": "system", "content": "You are a helpful educational assistant."},
             {"role": "user", "content": f"Create a {style.lower()} style lesson on '{topic}' for a {level.lower()} learner."}
